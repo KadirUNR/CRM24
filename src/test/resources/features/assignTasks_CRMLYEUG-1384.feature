@@ -19,6 +19,10 @@ Feature: As a user, I should be able to assign tasks under Quick Navigate Menu
 @WIP
   Scenario: HR User should be able to create "High priority" tasks with the mandatory fields.
     When user clicks the High priority Checkbox in the top right of the New Task page
+    And  user types description into Things to do input
+    And  user clicks the Add Task button
+    Then orange Flame sign appears next to task name
+
 
 
   Scenario: HR User should be able to assign a task to more than one user

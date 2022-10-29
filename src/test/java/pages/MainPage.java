@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -17,5 +18,19 @@ public class MainPage {
 
     @FindBy (id="tasks-task-priority-cb")
     public  WebElement highPriorityCheckbox;
+
+    @FindBy (xpath="//input[@data-bx-id='task-edit-title']")
+    public WebElement inputBox;
+
+    @FindBy(xpath="//button[@class='ui-btn ui-btn-success']")
+    public WebElement addTaskButton;
+
+    public WebElement highPriorityFlame(String taskName){
+        return Driver.getDriver().findElement(By.xpath("//a[.='"+taskName+"']/../span"));
+    }
+
+
+
+
 
 }

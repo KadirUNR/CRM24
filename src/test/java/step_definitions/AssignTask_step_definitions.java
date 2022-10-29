@@ -1,5 +1,6 @@
 package step_definitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -9,9 +10,13 @@ import pages.MainPage;
 import utilities.ConfigurationReader;
 import utilities.Driver;
 
+import java.util.UUID;
+
 public class AssignTask_step_definitions {
     LoginPage loginPage = new LoginPage();
     MainPage mainPage = new MainPage();
+
+    String TaskName;
 
     @When("user goes to login page")
     public void user_goes_to_login_page() {
@@ -39,6 +44,7 @@ public class AssignTask_step_definitions {
     }
     @When("user clicks on the tasks button")
     public void user_clicks_on_the_tasks_button() {
+
         mainPage.tasksButton.click();
     }
     @Then("user clicks on the New Task button on the tasks page top on the right side")
@@ -51,16 +57,28 @@ public class AssignTask_step_definitions {
      Driver.getDriver().switchTo().frame(Driver.getDriver().findElement(By.xpath("//iframe[@class='side-panel-iframe']")));
      mainPage.highPriorityCheckbox.click();
 
+
     }
     @When("user types description into Things to do input")
     public void user_types_description_into_things_to_do_input() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        TaskName= UUID.randomUUID().toString();
+        mainPage.inputBox.sendKeys(TaskName);
     }
-    @Then("user clicks the Add Task button and user should see an orange flame sign next to the created task")
-    public void user_clicks_the_add_task_button_and_user_should_see_an_orange_flame_sign_next_to_the_created_task() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @And("user clicks the Add Task button")
+    public void user_clicks_the_add_task_button() {
+        mainPage.addTaskButton.click();
+
+    }
+
+    @Then("orange Flame sign appears next to task name")
+    public void orange_Flame_sign_appears_next_to_task_name(){
+        Driver.getDriver().switchTo().parentFrame();
+
+        // Verify the related high priority flame sign is displayed
+
+        Assert.assertTrue(mainPage.highPriorityFlame(TaskName).isDisplayed());
+
+        //Assert.assertTrue(mainPage.flameSign.isDisplayed());
     }
 
 
@@ -94,11 +112,13 @@ public class AssignTask_step_definitions {
         throw new io.cucumber.java.PendingException();
     }
 
-    @When("user clicks the Add Task button")
+   /* @When("user clicks the Add Task button")
     public void user_clicks_the_add_task_button() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
+
     }
+    */
     @Then("get the new number of tasks under the My Tasks table and verify it is different than the saved number")
     public void get_the_new_number_of_tasks_under_the_my_tasks_table_and_verify_it_is_different_than_the_saved_number() {
         // Write code here that turns the phrase above into concrete actions
