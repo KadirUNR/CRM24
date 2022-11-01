@@ -16,7 +16,7 @@ Feature: As a user, I should be able to assign tasks under Quick Navigate Menu
     And  user clicks on the tasks button
     Then user clicks on the New Task button on the tasks page top on the right side
 
-@WIP
+
   Scenario: HR User should be able to create "High priority" tasks with the mandatory fields.
     When user clicks the High priority Checkbox in the top right of the New Task page
     And  user types description into Things to do input
@@ -24,13 +24,14 @@ Feature: As a user, I should be able to assign tasks under Quick Navigate Menu
     Then orange Flame sign appears next to task name
 
 
-
   Scenario: HR User should be able to assign a task to more than one user
     When user types description into Things to do input
     And  user clicks in the Add more button in the input box of Responsible person
     And  user selects more than one person from the list
-    Then user clicks the Add Task button and user should see an plus sign next to the created task
+    Then  user clicks the Add Task button
 
+
+  @WIP
   Scenario: When a task is created it can be seen on the count on the homepage under the my tasks table
     When user goes to the main page
     And  user save the count of the tasks under the My Tasks table
@@ -40,6 +41,8 @@ Feature: As a user, I should be able to assign tasks under Quick Navigate Menu
     And  user clicks the Add Task button
     And  user goes to the main page
     Then get the new number of tasks under the My Tasks table and verify it is different than the saved number
+
+
 
   Scenario: Checklist should be able to be added while creating a task.
     When user clicks on the Checklist button and user should see opens a field  with the title Checklist

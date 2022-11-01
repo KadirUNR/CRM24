@@ -5,11 +5,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import pages.LoginPage;
 import pages.MainPage;
 import utilities.ConfigurationReader;
 import utilities.Driver;
 
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 public class AssignTask_step_definitions {
@@ -17,6 +19,7 @@ public class AssignTask_step_definitions {
     MainPage mainPage = new MainPage();
 
     String TaskName;
+    String TaskCount;
 
     @When("user goes to login page")
     public void user_goes_to_login_page() {
@@ -50,18 +53,19 @@ public class AssignTask_step_definitions {
     @Then("user clicks on the New Task button on the tasks page top on the right side")
     public void user_clicks_on_the_new_task_button_on_the_tasks_page_top_on_the_right_side() {
         mainPage.newTaskButton.click();
+        Driver.getDriver().switchTo().frame(Driver.getDriver().findElement(By.xpath("//iframe[@class='side-panel-iframe']")));
+
 
     }
     @When("user clicks the High priority Checkbox in the top right of the New Task page")
     public void user_clicks_the_high_priority_checkbox_in_the_top_right_of_the_new_task_page() {
-     Driver.getDriver().switchTo().frame(Driver.getDriver().findElement(By.xpath("//iframe[@class='side-panel-iframe']")));
-     mainPage.highPriorityCheckbox.click();
+    mainPage.highPriorityCheckbox.click();
 
 
     }
     @When("user types description into Things to do input")
     public void user_types_description_into_things_to_do_input() {
-        TaskName= UUID.randomUUID().toString();
+        TaskName=UUID.randomUUID().toString();
         mainPage.inputBox.sendKeys(TaskName);
     }
     @And("user clicks the Add Task button")
@@ -84,48 +88,40 @@ public class AssignTask_step_definitions {
 
     @When("user clicks in the Add more button in the input box of Responsible person")
     public void user_clicks_in_the_add_more_button_in_the_input_box_of_responsible_person() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        mainPage.addMoreButton.click();
     }
     @When("user selects more than one person from the list")
     public void user_selects_more_than_one_person_from_the_list() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+       mainPage.firstPerson.click();
+
+
     }
-    @Then("user clicks the Add Task button and user should see an plus sign next to the created task")
-    public void user_clicks_the_add_task_button_and_user_should_see_an_plus_sign_next_to_the_created_task() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-
-
-
-
     @When("user goes to the main page")
     public void user_goes_to_the_main_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Driver.getDriver().switchTo().parentFrame();
+        try {
+            mainPage.closeNewTask.click();
+        } catch (ElementNotInteractableException e){
+            mainPage.homePageLogo.click();
+        }
+        mainPage.homePageLogo.click();
+
     }
     @When("user save the count of the tasks under the My Tasks table")
     public void user_save_the_count_of_the_tasks_under_the_my_tasks_table() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
+        TaskCount=mainPage.counter.getText();
+        System.out.println("TaskCount = " + TaskCount);
 
-   /* @When("user clicks the Add Task button")
-    public void user_clicks_the_add_task_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
 
     }
-    */
+
+
     @Then("get the new number of tasks under the My Tasks table and verify it is different than the saved number")
     public void get_the_new_number_of_tasks_under_the_my_tasks_table_and_verify_it_is_different_than_the_saved_number() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+         String lastCount =mainPage.counter.getText();
+        System.out.println("lastCount = " + lastCount);
+         Assert.assertNotEquals(TaskCount,lastCount);
     }
-
-
 
 
     @When("user clicks on the Checklist button and user should see opens a field  with the title Checklist")
