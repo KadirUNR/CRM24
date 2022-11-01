@@ -31,7 +31,7 @@ Feature: As a user, I should be able to assign tasks under Quick Navigate Menu
     Then  user clicks the Add Task button
 
 
-  @WIP
+
   Scenario: When a task is created it can be seen on the count on the homepage under the my tasks table
     When user goes to the main page
     And  user save the count of the tasks under the My Tasks table
@@ -45,24 +45,26 @@ Feature: As a user, I should be able to assign tasks under Quick Navigate Menu
 
 
   Scenario: Checklist should be able to be added while creating a task.
-    When user clicks on the Checklist button and user should see opens a field  with the title Checklist
+    When user clicks on the Checklist button
     And  user types something to do into input box
     Then user clicks the add button and a numbered check list should be displayed
+
 
   Scenario: Deadline should be able to be added while creating a task.
     When user types description into Things to do input
     And  user clicks in the input box next to the Deadline title
     And  user selects a day from the Calendar
     And  user clicks the select button
-    Then user clicks the Add Task button and the selected date appears in the deadline column
+    Then user clicks the Add Task button
+
 
   Scenario: Time planning function should be able to be used in setting the deadline
     When user types description into Things to do input
     And  user selects a day from the Calendar of Start task on menu
-    And  user selects a day from the Calendar of Finish menu
-    And  user clicks the select button
-    And  user clicks the Add Task button
-    Then user clicks on the created task name on the task list and time information of related tasks should be displayed
+    And  user input the duration
+    Then  user clicks the Add Task button
+
+
 
 
 

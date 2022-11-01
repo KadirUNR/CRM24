@@ -46,4 +46,35 @@ public class MainPage {
 
     @FindBy(xpath="//span [@class='task-item-index']")
     public WebElement counter;
+
+    @FindBy(className = "tasks-task-mpf-link")
+    public WebElement checkListButton;
+
+    @FindBy (xpath ="//input[@maxlength='255']")
+    public WebElement checklistField;
+
+    @FindBy (xpath="// span[@class='js-id-checklist-is-open-form task-dashed-link-inner']")
+    public  WebElement checklistAddButton;
+
+    @FindBy (xpath="//span[@class='js-id-checklist-is-i-title ']")
+    public WebElement checklistAddedTask;
+
+    @FindBy (xpath="//input[@data-bx-id='datepicker-display']")
+    public WebElement dateInputBox;
+
+    @FindBy (xpath="//a[@class='bx-calendar-cell bx-calendar-date-hidden']")
+    public WebElement dayDate;
+
+    @FindBy (xpath="//span[@class='bx-calendar-button-text']")
+    public WebElement dateSelectButton;
+
+    @FindBy (xpath="(//input[@class='task-options-inp'])[2]")
+    public WebElement startTaskBox;
+
+    @FindBy (xpath="//span[.='Select']")
+    public WebElement daySelect;
+
+    @FindBy(xpath="(//input[@class='task-options-inp'])[3]")
+    public WebElement durationInput;
+
 }
